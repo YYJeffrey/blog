@@ -1,0 +1,65 @@
+# docker-compose.yml
+version: "3"
+services:
+  blog-mysql:
+    image: mysql:5.7
+    restart: always
+    container_name: blog-mysql
+    privileged: false
+    ports:
+      - 3306:3306
+    networks:
+      - blog-extranet
+    environment:
+      - MYSQL_ROOT_PASSWORD=setapassword
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./mysql/conf/:/etc/mysql/
+      - ./mysql/data/:/var/lib/mysql/
+      - ./mysql/init/:/docker-entrypoint-initdb.d/
+      - ./mysql/logs/:/logs/
+  blog-solo:
+    image: b3log/solo
+    restart: always
+    container_name: blog-solo
+    privileged: false
+    networks:
+      - blog-extranet
+    links:
+      - blog-mysql
+    depends_on:
+      - blog-mysql
+    ports:
+      - 8080:8080
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./solo/conf/latke.properties:/opt/solo/WEB-INF/classes/latke.properties:ro
+      - ./solo/skins/:/opt/solo/skins/:ro
+    environment:
+      - RUNTIME_DB=MYSQL
+      - JDBC_USERNAME=root
+      - JDBC_PASSWORD=setapassword
+      - JDBC_DRIVER=com.mysql.cj.jdbc.Driver
+      - JDBC_URL=jdbc:mysql://blog-mysql/solo?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+  blog-nginx:
+    image: nginx:1.14
+    restart: always
+    container_name: blog-nginx
+    privileged: false
+    networks:
+      - blog-extranet
+    links:
+      - blog-solo
+    depends_on:
+      - blog-solo
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./nginx/conf/:/etc/nginx/conf.d/
+      - ./nginx/cert/:/etc/nginx/cert/
+      - ./nginx/logs/:/etc/nginx/log/
+networks:
+  blog-extranet:
+    driver: bridge
