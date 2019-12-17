@@ -33,7 +33,7 @@ services:
       - 8080:8080
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./solo/conf/latke.properties:/opt/solo/WEB-INF/classes/latke.properties:ro
+      - ./solo/conf/latke.properties:/opt/solo/latke.properties:ro
       - ./solo/skins/:/opt/solo/skins/:ro
     environment:
       - RUNTIME_DB=MYSQL
