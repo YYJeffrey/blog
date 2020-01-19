@@ -18,6 +18,7 @@ services:
       - ./mysql/data/:/var/lib/mysql/
       - ./mysql/init/:/docker-entrypoint-initdb.d/
       - ./mysql/logs/:/logs/
+      - ./mysql/backup/:/backup/
   blog-solo:
     image: b3log/solo
     restart: always
