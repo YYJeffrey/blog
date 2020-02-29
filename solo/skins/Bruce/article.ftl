@@ -73,7 +73,15 @@
                                 </div>
                             </div>
                         </div>
-                        <@comments commentList=articleComments article=article></@comments>
+                        <#if commentable>
+                            <div id="b3logsolocomments"></div>
+                            <div id="vcomment" data-name="${article.authorName}" data-postId="${article.oId}"></div>
+                            <#if !staticSite>
+                                <div id="soloComments" style="display: none;">
+                                    <@comments commentList=articleComments article=article></@comments>
+                                </div>
+                            </#if>
+                        </#if>
                     </div>
                     <#if 0 != relevantArticlesDisplayCount>
                     <div id="relevantArticles"></div>

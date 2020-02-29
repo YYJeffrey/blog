@@ -19,17 +19,15 @@
 -->
 <span style="color: gray;">&copy; ${year}</span> <a href="${servePath}">${blogTitle}</a> ${footerContent}<br/>
 Powered by <a href="https://solo.b3log.org" target="_blank">Solo</a>&nbsp;&nbsp;
-Theme <a rel="friend" href="https://github.com/b3log/solo-skins" target="_blank">${skinDirName}</a>
+Theme ${skinDirName}
 by <a rel="friend" href="http://vanessa.b3log.org" target="_blank">Vanessa</a>.
 <div class='goTopIcon' onclick='Util.goTop();'></div>
 <div class='goBottomIcon' onclick='Util.goBottom();'></div>
-<script type="text/javascript" src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="${staticServePath}/js/common${miniPostfix}.js?${staticResourceVersion}" charset="utf-8"></script>
 <#include "../../common-template/label.ftl">
+<script type="text/javascript" src="${staticServePath}/js/common.min.js?${staticResourceVersion}" charset="utf-8"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         Util.setTopBar()
-        Util.replaceSideEm($("#recentComments li a"));
     });
 </script>
 ${plugins}

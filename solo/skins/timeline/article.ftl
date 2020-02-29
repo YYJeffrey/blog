@@ -77,19 +77,16 @@ ${topBarReplacement}
                         <span class="ico-author ico" title="${authorLabel}">
                             <a rel="author" href="${servePath}/authors/${article.authorId}">${article.authorName}</a>
                         </span>
+                        <#if commentable>
                         <span class="ico-comment ico" title="${commentLabel}">
-
-                            <a rel="nofollow" href="${servePath}${article.articlePermalink}#comments">
-                                <#if article.articleCommentCount == 0>
-                                    ${noCommentLabel}
-                                <#else>
-                                    ${article.articleCommentCount}
-                                </#if>
+                            <a rel="nofollow" href="${servePath}${article.articlePermalink}#b3logsolocomments">
+                                <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>
                             </a>
                         </span>
+                        </#if>
                         <span class="ico-view ico" title="${viewLabel}">
                             <a rel="nofollow" href="${servePath}${article.articlePermalink}">
-                            ${article.articleViewCount}
+                            <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span>
                             </a>
                         </span>
                     </article>
@@ -120,7 +117,15 @@ ${topBarReplacement}
                     <#if externalRelevantArticlesDisplayCount?? && 0 != externalRelevantArticlesDisplayCount>
                     <div id="externalRelevantArticles"></div>
                     </#if>
-                    <@comments commentList=articleComments article=article></@comments>
+                    <#if commentable>
+                        <div id="b3logsolocomments"></div>
+                        <div id="vcomment" class="module" data-name="${article.authorName}" data-postId="${article.oId}"></div>
+                        <#if !staticSite>
+                        <div id="soloComments" style="display: none;" class="module">
+                            <@comments commentList=articleComments article=article></@comments>
+                        </div>
+                        </#if>
+                    </#if>
                 </div>
             </div>
             <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>

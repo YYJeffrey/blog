@@ -20,18 +20,20 @@
 <div class="article-list fn-clear">
     <#list articles as article>
     <div>
-        <img src="${article.articleImg1URL}"/>
+        <img src="${article.articleImg1URL}" alt="${article.articleTitle}"/>
         <div class="article-abstract article-image">
             <div class="fn-clear">
                 <div class="article-date" data-ico="&#xe200;">
                     ${article.articleUpdateDate?string("yy-MM-dd HH:mm")}
                 </div>
                 <div class="fn-right">
-                    <a rel="nofollow" data-ico="&#xe14e;" href="${servePath}${article.articlePermalink}#comments">
+                    <#if commentable>
+                    <a rel="nofollow" data-ico="&#xe14e;" data-uvstatcmt="${article.oId}" href="${servePath}${article.articlePermalink}#b3logsolocomments">
                         ${article.articleCommentCount}
                     </a>
+                    </#if>
                     <a rel="nofollow" data-ico="&#xe185;" href="${servePath}${article.articlePermalink}">
-                        ${article.articleViewCount}
+                        <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span>
                     </a>
                     <a rel="nofollow" data-ico="&#x0060;" href="${servePath}/authors/${article.authorId}">
                         ${article.authorName}
@@ -71,18 +73,18 @@
 <#if 0 != paginationPageCount>
 <div class="pagination">
     <#if 1 != paginationPageNums?first>
-    <a id="previousPage" href="${servePath}${path}?p=${paginationPreviousPageNum}"
+    <a id="previousPage" href="${servePath}${path}${pagingSep}${paginationPreviousPageNum}"
        title="${previousPageLabel}"><</a>
     </#if>
     <#list paginationPageNums as paginationPageNum>
     <#if paginationPageNum == paginationCurrentPageNum>
     <span>${paginationPageNum}</span>
     <#else>
-    <a href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a>
+    <a href="${servePath}${path}${pagingSep}${paginationPageNum}">${paginationPageNum}</a>
     </#if>
     </#list>
     <#if paginationPageNums?last != paginationPageCount>
-    <a id="nextPage" href="${servePath}${path}?p=${paginationNextPageNum}" title="${nextPagePabel}">></a>
+    <a id="nextPage" href="${servePath}${path}${pagingSep}${paginationNextPageNum}" title="${nextPagePabel}">></a>
     </#if>
     </#if>
 </div>

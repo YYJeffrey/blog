@@ -77,7 +77,7 @@
                     ${article.articleUpdateDate?string("yyyy-MM-dd")} •
                     </time>
                     <a class="post__view" href="${servePath}${article.articlePermalink}">
-                    ${article.articleViewCount} ${viewLabel}</a>
+                        <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span> ${viewLabel}</a>
                     <div class="fn-right">
                     <span class="vditor-tooltipped vditor-tooltipped__n post__share-icon ft-green"
                           onclick="$('#comment').focus()"
@@ -85,7 +85,7 @@
                         <svg>
                             <use xlink:href="#icon-comment"></use>
                         </svg>
-                    ${article.articleCommentCount}  &nbsp; &nbsp;
+                    <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>  &nbsp; &nbsp;
                     </span>
 
                         <span id="articleShare">
@@ -118,14 +118,22 @@
                     <div class="fn-flex-1" id="relevantArticles"></div>
                     <div class="fn-flex-1" id="randomArticles"></div>
                 </div>
-            <@comments commentList=articleComments article=article></@comments>
+                <#if commentable>
+                    <div id="b3logsolocomments"></div>
+                    <div id="vcomment" class="article__comment" data-name="${article.authorName}" data-postId="${article.oId}"></div>
+                    <#if !staticSite>
+                        <div id="soloComments" style="display: none;">
+                            <@comments commentList=articleComments article=article></@comments>
+                        </div>
+                    </#if>
+                </#if>
             </div>
         </div>
 
         <div class="article__toolbar">
             <div class="wrapper">
                 <a class="post__view" href="${servePath}${article.articlePermalink}">
-                ${article.articleViewCount} ${viewLabel}
+                    <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span> ${viewLabel}
                 </a>
                 <div class="fn-right">
                 <span class="vditor-tooltipped vditor-tooltipped__n post__share-icon ft-green"
@@ -134,7 +142,7 @@
                     <svg>
                         <use xlink:href="#icon-comment"></use>
                     </svg>
-                ${article.articleCommentCount}  &nbsp; &nbsp;
+                <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>  &nbsp; &nbsp;
                 </span>
                     <span id="articleBottomShare">
                     <span class="post__share-icon" data-type="wechat">
@@ -170,7 +178,7 @@
         <span class="vditor-tooltipped vditor-tooltipped__e post__share-icon ft-green"
               onclick="$('#comment').focus()"
               aria-label="${commentLabel}">
-            <span class="ft-gray">${article.articleCommentCount}</span>
+            <span class="ft-gray" data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>
             <svg>
                 <use xlink:href="#icon-comment"></use>
             </svg>
@@ -205,7 +213,6 @@
     <#if pjax><!---- pjax {#pjax} end ----></#if>
 </div>
 <#include "footer.ftl">
-<script type="text/javascript" src="${staticServePath}/js/lib/jquery.qrcode.min.js"></script>
 <#if pjax><!---- pjax {#pjax} start ----></#if>
 <@comment_script oId=article.oId commentable=article.commentable>
     Skin.initArticle()

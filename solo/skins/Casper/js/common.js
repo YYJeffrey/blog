@@ -19,24 +19,31 @@
  * @fileoverview util and every page should be used.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.1.1.0, Apr 19, 2019
+ * @version 1.0.0.0, Jan 18, 2019
  */
 
+import '../../../js/common'
+
+window.utilOptions = {
+  cmtCountCB: (element, cnt) => {
+    if (cnt > 0) {
+      element.parentElement.style.display = 'inline'
+      element.parentElement.nextElementSibling.style.display = 'none'
+    }
+  },
+}
 /**
  * @description 皮肤脚本
  * @static
  */
-var Skin = {
+window.Skin = {
   init: function () {
+    if (Label.staticSite) {
+      return
+    }
     Util.initPjax()
   },
-  initArticle: function () {
-    page.share()
-
-    var $articleTocs = $('.vditor-reset [id^=b3_solo_h]')
-    var $articleToc = $('.article__toc')
-    var $articleProgress = $('.article__progress')
-
+  _positionToc: function ($articleToc) {
     if ($articleToc.length === 1) {
       if ($(window).width() > 876) {
         $('.post__toc').
@@ -48,6 +55,15 @@ var Skin = {
         })
       }
     }
+  },
+  initArticle: function () {
+    page.share()
+
+    var $articleTocs = $('.vditor-reset [id^=toc_h]')
+    var $articleToc = $('.article__toc')
+    var $articleProgress = $('.article__progress')
+
+    Skin._positionToc($articleToc)
 
     $articleToc.find('a').click(function (event) {
       var id = $(this).attr('href')
@@ -114,6 +130,10 @@ var Skin = {
     })
 
     $(window).scroll()
+
+    $(window).resize(function () {
+      Skin._positionToc($articleToc)
+    })
   },
 }
 Skin.init()

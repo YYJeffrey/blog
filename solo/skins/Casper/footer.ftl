@@ -25,7 +25,7 @@
             ${footerContent} &nbsp;•&nbsp;
             Powered by <a href="https://solo.b3log.org" target="_blank">Solo</a>
             <br>
-            Theme <a rel="friend" href="https://github.com/b3log/solo-skins" target="_blank">${skinDirName}</a>
+            Theme ${skinDirName}
             <sup>[<a href="https://github.com/TryGhost/Casper" target="_blank">ref</a>]</sup>
             by <a href="http://vanessa.b3log.org" target="_blank">Vanessa</a>
         </div>
@@ -43,18 +43,14 @@
             </a>
             <br>
             ${statistic.statisticPublishedBlogArticleCount} ${articleLabel} &nbsp;
-            ${statistic.statisticPublishedBlogCommentCount} ${commentLabel} &nbsp;
-            ${statistic.statisticBlogViewCount} ${viewLabel} &nbsp;
-            ${onlineVisitorCnt} ${onlineVisitorLabel}
+            <span data-uvstaturl="${servePath}">${statistic.statisticBlogViewCount}</span> ${viewLabel} &nbsp;
+            <#if !staticSite>${onlineVisitorCnt} ${onlineVisitorLabel}</#if>
         </div>
     </div>
 </footer>
 
-<script type="text/javascript" src="${staticServePath}/js/lib/compress/pjax.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="${staticServePath}/js/common${miniPostfix}.js?${staticResourceVersion}"
-        charset="utf-8"></script>
-<script type="text/javascript"
-        src="${staticServePath}/skins/${skinDirName}/js/common${miniPostfix}.js?${staticResourceVersion}"
-        charset="utf-8"></script>
 <#include "../../common-template/label.ftl">
+<script type="text/javascript"
+        src="${staticServePath}/skins/${skinDirName}/js/common.min.js?${staticResourceVersion}"
+        charset="utf-8"></script>
 ${plugins}

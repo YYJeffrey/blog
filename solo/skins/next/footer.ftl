@@ -20,8 +20,8 @@
 <footer class="footer">
     <div class="wrapper">
         <div class="fn-clear">
-            <a href="${servePath}">${blogTitle}</a> •
-        ${onlineVisitor1Label}${onlineVisitorCnt}
+            <a href="${servePath}">${blogTitle}</a>
+            <#if !staticSite> • ${onlineVisitor1Label}${onlineVisitorCnt}</#if>
             <div class="fn-right">
             <#include "../../common-template/macro-user_site.ftl"/>
             <@userSite dir="n"/>
@@ -34,7 +34,7 @@
             Powered by <a href="https://solo.b3log.org" target="_blank">Solo</a>
 
             <div class="fn-right">
-                Theme <a rel="friend" href="https://github.com/b3log/solo-skins" target="_blank">${skinDirName}</a>
+                Theme ${skinDirName}
                 <sup>[<a href="https://github.com/iissnan/hexo-theme-next" target="_blank">ref</a>]</sup>
                 by <a href="http://vanessa.b3log.org" target="_blank">Vanessa</a>
             </div>
@@ -43,13 +43,8 @@
 </footer>
 <div class="back-to-top" onclick="Util.goTop()"></div>
 
-<script type="text/javascript" src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="${staticServePath}/js/common${miniPostfix}.js?${staticResourceVersion}"
-        charset="utf-8"></script>
-<script type="text/javascript"
-        src="${staticServePath}/skins/${skinDirName}/js/${skinDirName}${miniPostfix}.js?${staticResourceVersion}"
-        charset="utf-8"></script>
 <#include "../../common-template/label.ftl">
+<script src="${staticServePath}/skins/${skinDirName}/js/common.min.js?${staticResourceVersion}"></script>
 <script type="text/javascript">
     Label.tocLabel = "${tocLabel}"
     Label.siteViewLabel = "${siteViewLabel}"

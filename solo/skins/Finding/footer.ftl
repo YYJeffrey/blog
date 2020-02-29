@@ -23,12 +23,10 @@
     ${footerContent}
     <span class="fn-right">
         Powered by <a href="https://solo.b3log.org" target="_blank">Solo</a>&nbsp;&nbsp;
-        Theme <a rel="friend" href="https://github.com/b3log/solo-skins" target="_blank">${skinDirName}</a>
+        Theme ${skinDirName}
         by <a rel="friend" href="http://vanessa.b3log.org" target="_blank">Vanessa</a>.
     </span>
 </footer>
-<script type="text/javascript" src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="${staticServePath}/js/common${miniPostfix}.js?${staticResourceVersion}" charset="utf-8"></script>
-<script type="text/javascript" src="${staticServePath}/skins/${skinDirName}/js/${skinDirName}${miniPostfix}.js?${staticResourceVersion}" charset="utf-8"></script>
 <#include "../../common-template/label.ftl">
+<script src="${staticServePath}/skins/${skinDirName}/js/common.min.js?${staticResourceVersion}"></script>
 ${plugins}

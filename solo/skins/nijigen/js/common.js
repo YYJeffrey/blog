@@ -19,14 +19,16 @@
  * @fileoverview util and every page should be used.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.3.0.0, Dev 17, 2018
+ * @version 1.0.0.0, Jan 18, 2019
  */
+
+import '../../../js/common'
 
 /**
  * @description 皮肤脚本
  * @static
  */
-var Skin = {
+window.Skin = {
   _initCommon: function ($goTop) {
     $(window).scroll(function () {
       if ($(window).scrollTop() > 125) {
@@ -78,9 +80,6 @@ var Skin = {
     }
   },
   init: function () {
-    Util.initPjax(function () {
-      Skin._initAnimation()
-    })
 
     Skin._initAnimation()
 
@@ -98,6 +97,13 @@ var Skin = {
 
     $('.header__logo').click(function () {
       $('.header__nav a, .header__m a').removeClass('current')
+    })
+
+    if (Label.staticSite) {
+      return
+    }
+    Util.initPjax(function () {
+      Skin._initAnimation()
     })
   },
   _initArticleCommon: function () {

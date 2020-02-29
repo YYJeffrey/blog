@@ -86,14 +86,13 @@
                                         </#if>
                                     </div>
                                     <div class="right">
-                                        <span class="article-create-date left">
-                                            ${article.articleUpdateDate?string("yyyy-MM-dd HH:mm:ss")}&nbsp;&nbsp;
-                                        </span>
-                                        <a rel="nofollow" href="${servePath}${article.articlePermalink}#comments" class="left">
-                                            &nbsp;${article.articleCommentCount} ${commentLabel}&nbsp;&nbsp;
+                                        <#if commentable>
+                                        <a rel="nofollow" href="${servePath}${article.articlePermalink}#b3logsolocomments" class="left">
+                                            &nbsp;<span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span> ${commentLabel}&nbsp;&nbsp;
                                         </a>
+                                        </#if>
                                         <a rel="nofollow" href="${servePath}${article.articlePermalink}" class="left">
-                                            &nbsp;&nbsp;${article.articleViewCount} ${viewLabel}&nbsp;&nbsp;
+                                            &nbsp;&nbsp;<span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span> ${viewLabel}&nbsp;&nbsp;
                                         </a>
                                     </div>
                                     <div class="clear"></div>
@@ -103,7 +102,17 @@
                                 <div id="externalRelevantArticles" class="article-relative"></div>
                             </div>
                             <div class="line right"></div>
-                            <@comments commentList=articleComments article=article></@comments>
+                            <#if commentable>
+                                <div id="b3logsolocomments"></div>
+                                <div id="vcomment"
+                                     style="margin: 88px 100px 0 99px;background-color: #effdff;border-radius: 10px;padding: 10px;"
+                                     data-name="${article.authorName}" data-postId="${article.oId}"></div>
+                                <#if !staticSite>
+                                    <div id="soloComments" style="display: none;">
+                                        <@comments commentList=articleComments article=article></@comments>
+                                    </div>
+                                </#if>
+                            </#if>
                         </div>
                         <div class="left side">
                             <#include "side.ftl">

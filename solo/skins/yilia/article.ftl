@@ -61,22 +61,20 @@
                 </#list>
             </div>
             <span>&nbsp;&nbsp;&nbsp;</span>
-            <#if article.articleCommentCount != 0>
-                <a href="${servePath}${article.articlePermalink}#comments"
+            <#if commentable>
+                <a href="${servePath}${article.articlePermalink}#b3logsolocomments"
                    class="vditor-tooltipped__n vditor-tooltipped link fn__flex-center"
                    aria-label="${commentLabel}">
-                    ${article.articleCommentCount}
+                    <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>
                     <span class="icon-chat"></span>
                 </a>
             </#if>
-            <#if article.articleViewCount != 0>
-                <a class="vditor-tooltipped__n vditor-tooltipped link fn__flex-center"
-                   href="${servePath}${article.articlePermalink}"
-                   aria-label="${viewLabel}">
-                    ${article.articleViewCount}
-                    <span class="icon-views"></span>
-                </a>
-            </#if>
+            <a class="vditor-tooltipped__n vditor-tooltipped link fn__flex-center"
+               href="${servePath}${article.articlePermalink}"
+               aria-label="${viewLabel}">
+                <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span>
+                <span class="icon-views"></span>
+            </a>
             <a rel="nofollow" href="${servePath}/authors/${article.authorId}" class="fn__flex-center">
                 <img class="avatar" title="${article.authorName}" alt="${article.authorName}"
                      src="${article.authorThumbnailURL}"/>
@@ -111,15 +109,7 @@
 
         <footer class="fn-clear share">
             <div class="fn-right">
-                        <span class="icon icon-wechat"
-                              data-type="wechat"
-                              data-title="${article.articleTitle}"
-                              data-blogtitle="${blogTitle}"
-                              data-url="${servePath}${article.articlePermalink}"
-                              data-avatar="${article.authorThumbnailURL}"></span>
-                <span class="icon icon-weibo" data-type="weibo"></span>
-                <span class="icon icon-twitter" data-type="twitter"></span>
-                <span class="icon icon-qqz" data-type="qqz"></span>
+                <#include "../../common-template/share.ftl">
             </div>
         </footer>
         <#if 0 != relevantArticlesDisplayCount>
@@ -133,7 +123,16 @@
         </#if>
         <br>
     </article>
-    <@comments commentList=articleComments article=article></@comments>
+    <#if commentable>
+        <div id="b3logsolocomments"></div>
+        <div id="vcomment" style="padding: 30px 60px 30px 50px;" data-name="${article.authorName}"
+             data-postId="${article.oId}"></div>
+        <#if !staticSite>
+            <div id="soloComments" style="display: none;">
+                <@comments commentList=articleComments article=article></@comments>
+            </div>
+        </#if>
+    </#if>
 
     <#include "footer.ftl">
 
@@ -148,7 +147,7 @@
         <#if 0 != relevantArticlesDisplayCount>
             page.loadRelevantArticles('${article.oId}', '<h4>${relevantArticles1Label}</h4>');
         </#if>
-        Yilia.share()
+        page.share()
     </@comment_script>
 </main>
 </body>

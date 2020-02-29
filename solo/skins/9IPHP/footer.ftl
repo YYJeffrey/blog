@@ -24,13 +24,11 @@
     <br/>
     Powered by <a href="https://solo.b3log.org" target="_blank">Solo</a>
     <span class="ft-warn">&heartsuit;</span>
-    Theme <a rel="friend" href="https://github.com/b3log/solo-skins" target="_blank">${skinDirName}</a>
+    Theme ${skinDirName}
     <sup>[<a href="https://github.com/9IPHP/9IPHP" target="_blank">ref</a>]</sup>
     by <a href="http://vanessa.b3log.org" target="_blank">Vanessa</a>
 </footer>
 <div class="icon-up" onclick="Util.goTop()"></div>
-<script src="${staticServePath}/js/lib/compress/pjax.min.js"></script>
-<script src="${staticServePath}/js/common${miniPostfix}.js?${staticResourceVersion}"></script>
-<script src="${staticServePath}/skins/${skinDirName}/js/common${miniPostfix}.js?${staticResourceVersion}"></script>
 <#include "../../common-template/label.ftl">
+<script src="${staticServePath}/skins/${skinDirName}/js/common.min.js?${staticResourceVersion}"></script>
 ${plugins}

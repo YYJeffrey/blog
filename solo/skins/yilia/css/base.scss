@@ -21,12 +21,12 @@
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 2.6.0.0, Aug 2, 2019
+ * @version 2.6.0.1, Feb 9, 2020
  */
 @import "../../../scss/toc";
 @import "../../../scss/usite";
 @import "../../../scss/function";
-@import "vditor/src/assets/scss/classic";
+@import "vditor/src/assets/scss/index";
 
 .vditor-reset::-webkit-scrollbar {
   display: none;
@@ -643,7 +643,7 @@ article .abstract {
   overflow: hidden;
   word-wrap: break-word;
   display: block;
-  color: rgba(0,0,0,0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .article__footer {
@@ -674,26 +674,43 @@ article .abstract a:hover {
   opacity: 0.7;
 }
 
-.share {
-  .icon-wechat {
-    position: relative;
-    z-index: 12;
-  }
+.article__share {
+  display: inline-block;
+  position: relative;
 
-  canvas {
-    position: absolute;
-    right: -54px;
-    top: 18px;
-  }
-
-  span {
-    transition: all 0.2s ease-out 0s;
+  .item {
+    float: left;
+    text-align: center;
+    padding: 5px;
+    box-sizing: border-box;
     cursor: pointer;
+    transition: all .3s ease;
+    opacity: .86;
+    color: rgba(0, 0, 0, 0.6);
+
+    svg {
+      fill: currentColor;
+      height: 16px;
+      width: 16px;
+      float: left;
+    }
+
+    &:hover {
+      transform: rotate(360deg);
+      color: #333;
+    }
+
+    &__qr {
+      position: absolute;
+      top: 25px;
+      left: 32px;
+      height: 99px;
+      width: 99px;
+    }
   }
 }
 
-article footer .avatar:hover,
-.share span:hover {
+article footer .avatar:hover {
   transform: rotate(360deg);
   color: #333;
 }
@@ -821,7 +838,6 @@ article.post {
 
 .post .share {
   padding: 10px 0 0 0;
-  font-size: 14px;
   margin: 30px 30px 20px 30px;
   border-top: 1px solid #ddd;
 }
@@ -989,14 +1005,6 @@ footer.footer .icon-goup:hover {
 .classify-name {
   font-size: 18px;
   margin: 30px;
-}
-
-.dynamic li {
-  list-style: none;
-}
-
-.dynamic .comments li:last-child {
-  border-bottom-width: 0;
 }
 
 /* end classify*/

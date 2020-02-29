@@ -48,9 +48,11 @@
             </#list>
             </span>
             <div class="fn__right">
-                <a class="ft__red" href="${servePath}${article.articlePermalink}#comments"><#if article.articleCommentCount gt 0>${article.articleCommentCount} </#if>${commentLabel}</a>
+            <#if commentable>
+                <a class="ft__red" href="${servePath}${article.articlePermalink}#b3logsolocomments"><span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span> ${commentLabel}</a>
                 •
-                <a class="ft__red" href="${servePath}${article.articlePermalink}">${article.articleViewCount} ${viewLabel}</a>
+            </#if>
+                <a class="ft__red" href="${servePath}${article.articlePermalink}"><span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span> ${viewLabel}</a>
             </div>
         </div>
         <div class="vditor-reset article__content">
@@ -64,7 +66,7 @@
 <#if 0 != paginationPageCount>
     <nav class="fn__flex pagination">
         <#if 1 != paginationPageNums?first>
-            <a href="${servePath}${path}?p=${paginationPreviousPageNum}" class="pagination__item fn__flex-center">&laquo; Prev</a>
+            <a href="${servePath}${path}${pagingSep}${paginationPreviousPageNum}" class="pagination__item fn__flex-center">&laquo; Prev</a>
         </#if>
 
         <div class="fn__flex-1 ft__center">
@@ -77,18 +79,18 @@
             <span class="pagination__item pagination__item--current">${paginationPageNum}</span>
             <#else>
             <a class="pagination__item"
-               href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a>
+               href="${servePath}${path}${pagingSep}${paginationPageNum}">${paginationPageNum}</a>
             </#if>
         </#list>
         <#if paginationPageNums?last != paginationPageCount>
             <span class="pagination__item">...</span>
-            <a href="${servePath}${path}?p=${paginationPageCount}"
+            <a href="${servePath}${path}${pagingSep}${paginationPageCount}"
                class="pagination__item">${paginationPageCount}</a>
         </#if>
         </div>
 
         <#if paginationPageNums?last != paginationPageCount>
-            <a href="${servePath}${path}?p=${paginationNextPageNum}" class="pagination__item fn__flex-center">Next &raquo;</a>
+            <a href="${servePath}${path}${pagingSep}${paginationNextPageNum}" class="pagination__item fn__flex-center">Next &raquo;</a>
         </#if>
     </nav>
 </#if>

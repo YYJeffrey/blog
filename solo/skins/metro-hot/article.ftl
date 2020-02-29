@@ -36,7 +36,6 @@
         </@head>
     </head>
     <body>
-        ${topBarReplacement}
         <div class="wrapper">
             <div id="header">
                 <#include "header.ftl">
@@ -59,11 +58,13 @@
                         </#list>
                     </div>
                     <div class="article-info">
-                        <a rel="nofollow" data-ico="&#xe14e;" href="${servePath}${article.articlePermalink}#comments">
-                            ${article.articleCommentCount}
+                        <#if commentable>
+                        <a rel="nofollow" data-ico="&#xe14e;" href="${servePath}${article.articlePermalink}#b3logsolocomments">
+                            <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>
                         </a>
+                        </#if>
                         <a rel="nofollow" data-ico="&#xe185;" href="${servePath}${article.articlePermalink}">
-                            ${article.articleViewCount}
+                            <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span>
                         </a>
                         <a rel="nofollow" data-ico="&#x0060;" href="${servePath}/authors/${article.authorId}">
                             ${article.authorName}
@@ -79,7 +80,15 @@
                         ${article.articleSign.signHTML}
                         </#if>
                     </div>
-                    <@comments commentList=articleComments article=article></@comments>
+                    <#if commentable>
+                        <div id="b3logsolocomments"></div>
+                        <div id="vcomment" data-name="${article.authorName}" data-postId="${article.oId}"></div>
+                        <#if !staticSite>
+                            <div id="soloComments" style="display: none;">
+                                <@comments commentList=articleComments article=article></@comments>
+                            </div>
+                        </#if>
+                    </#if>
                     <#include "copyright.ftl"/>
                 </div>
                 <@side isArticle=true />
@@ -100,6 +109,7 @@
         <#if 0 != externalRelevantArticlesDisplayCount>
         MetroHot.loadExternalRelevantArticles("<#list article.articleTags?split(",") as articleTag>${articleTag}<#if articleTag_has_next>,</#if></#list>");
         </#if>
+            page.share()
         </@comment_script>
     </body>
 </html>

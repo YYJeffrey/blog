@@ -41,7 +41,7 @@
         </header>
         <#if article.articleAbstractText == ''>
             <a class="abstract" href="${servePath}${article.articlePermalink}">
-               <img src="${article.articleImg1URL}"/>
+               <img src="${article.articleImg1URL}" alt="${blogTitle}"/>
             </a>
         <#else>
             <a class="abstract vditor-reset" href="${servePath}${article.articlePermalink}">
@@ -58,22 +58,20 @@
                 </#list>
             </div>
             <span>&nbsp;&nbsp;&nbsp;</span>
-            <#if article.articleCommentCount != 0>
-                <a href="${servePath}${article.articlePermalink}#comments"
+            <#if commentable>
+                <a href="${servePath}${article.articlePermalink}#b3logsolocomments"
                    class="vditor-tooltipped__n vditor-tooltipped link fn__flex-center"
                    aria-label="${commentLabel}">
-                    ${article.articleCommentCount}
+                    <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>
                     <span class="icon-chat"></span>
                 </a>
             </#if>
-            <#if article.articleViewCount != 0>
-                <a class="vditor-tooltipped__n vditor-tooltipped link fn__flex-center"
-                   href="${servePath}${article.articlePermalink}"
-                   aria-label="${viewLabel}">
-                    ${article.articleViewCount}
-                    <span class="icon-views"></span>
-                </a>
-            </#if>
+            <a class="vditor-tooltipped__n vditor-tooltipped link fn__flex-center"
+               href="${servePath}${article.articlePermalink}"
+               aria-label="${viewLabel}">
+                <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span>
+                <span class="icon-views"></span>
+            </a>
             <a rel="nofollow" href="${servePath}/authors/${article.authorId}" class="fn__flex-center">
                 <img class="avatar" title="${article.authorName}" alt="${article.authorName}"
                      src="${article.authorThumbnailURL}"/>
@@ -85,19 +83,19 @@
 <#if 0 != paginationPageCount>
     <nav class="pagination">
         <#if 1 != paginationPageNums?first>
-            <a href="${servePath}${path}?p=${paginationPreviousPageNum}" class="extend">${previousPageLabel}</a>
+            <a href="${servePath}${path}${pagingSep}${paginationPreviousPageNum}" class="extend">${previousPageLabel}</a>
             <a class="page-num" href="${servePath}${path}">1</a> ...
         </#if>
         <#list paginationPageNums as paginationPageNum>
             <#if paginationPageNum == paginationCurrentPageNum>
                 <span class="current page-num">${paginationPageNum}</span>
             <#else>
-                <a class="page-num" href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a>
+                <a class="page-num" href="${servePath}${path}${pagingSep}${paginationPageNum}">${paginationPageNum}</a>
             </#if>
         </#list>
         <#if paginationPageNums?last != paginationPageCount> ...
-            <a href="${servePath}${path}?p=${paginationPageCount}" class="page-num">${paginationPageCount}</a>
-            <a href="${servePath}${path}?p=${paginationNextPageNum}" class="extend">${nextPagePabel}</a>
+            <a href="${servePath}${path}${pagingSep}${paginationPageCount}" class="page-num">${paginationPageCount}</a>
+            <a href="${servePath}${path}${pagingSep}${paginationNextPageNum}" class="extend">${nextPagePabel}</a>
         </#if>
     </nav>
 </#if>

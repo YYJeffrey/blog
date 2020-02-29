@@ -23,17 +23,16 @@
     <br>
     &copy; ${year} <a href="${servePath}">${blogTitle}</a> ${footerContent} Powered by <a href="https://solo.b3log.org" target="_blank">Solo</a>
     <div>
-        Theme <a rel="friend" href="https://github.com/b3log/solo-skins" target="_blank">${skinDirName}</a>
+        Theme ${skinDirName}
         by
-        <a rel="friend" href="http://88250.b3log.org" target="_blank">88250</a>
+        <a rel="friend" href="https://88250.b3log.org" target="_blank">88250</a>
     </div>
     <div><em>All rights reserved.</em></div>
 </div>
 
-<script type="text/javascript" src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="${staticServePath}/js/common${miniPostfix}.js?${staticResourceVersion}" charset="utf-8"></script>
-<script type="text/javascript" src="${staticServePath}/skins/${skinDirName}/js/bootstrap${miniPostfix}.js?${staticResourceVersion}" charset="utf-8"></script>
 <#include "../../common-template/label.ftl">
+<script type="text/javascript" src="${staticServePath}/js/common.min.js?${staticResourceVersion}" charset="utf-8"></script>
+<script type="text/javascript" src="${staticServePath}/skins/${skinDirName}/js/bootstrap.min.js?${staticResourceVersion}" charset="utf-8"></script>
 <script>
     Util.setTopBar()
 </script>

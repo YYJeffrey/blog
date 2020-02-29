@@ -85,7 +85,15 @@
             <#include "../../common-template/toc.ftl"/>
         </div>
     </#if>
-    <@comments commentList=articleComments article=article></@comments>
+    <#if commentable>
+        <div id="b3logsolocomments"></div>
+        <div id="vcomment" class="comment__wrapper wrapper" style="margin: 40px auto" data-name="${article.authorName}" data-postId="${article.oId}"></div>
+        <#if !staticSite>
+            <div id="soloComments" style="display: none;">
+                <@comments commentList=articleComments article=article></@comments>
+            </div>
+        </#if>
+    </#if>
     <div class="article__bottom">
         <div class="wrapper">
             <div class="fn__flex">

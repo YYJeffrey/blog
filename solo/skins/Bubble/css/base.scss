@@ -19,13 +19,13 @@
  * skin style
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.4.0.0, Aug 2, 2019
+ * @version 0.4.1.1, Feb 9, 2020
  */
 @import "../../../scss/reset";
 @import "../../../scss/usite";
 @import "../../../scss/toc";
 @import "../../../scss/function";
-@import "vditor/src/assets/scss/classic";
+@import "vditor/src/assets/scss/index";
 
 $fade-lighter: rgba(255, 255, 255, .8) !default;
 $gray: #738a94 !default;
@@ -431,7 +431,6 @@ a {
         padding: 0 10px 0 20px;
         overflow: hidden;
         white-space: nowrap;
-        text-overflow: ellipsis;
 
         &:after {
           display: inline-block;
@@ -763,7 +762,9 @@ a {
       &__qr {
         position: absolute;
         top: 24px;
-        left: 60px;
+        left: 68px;
+        height: 99px;
+        width: 99px;
       }
     }
   }

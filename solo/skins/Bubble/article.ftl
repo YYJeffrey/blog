@@ -82,7 +82,24 @@
             <#include "../../common-template/toc.ftl"/>
         </div>
     </#if>
-    <@comments commentList=articleComments article=article></@comments>
+    <#if commentable>
+        <div id="b3logsolocomments"></div>
+        <div class="wrapper">
+            <div id="vcomment"
+                 style="    margin-bottom: 40px; margin-top: 80px;
+        border: 1px solid rgba(255,255,255,0.8);
+        border-radius: 5px;
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        padding: 20px;"
+                 data-name="${article.authorName}" data-postId="${article.oId}"></div>
+        </div>
+        <#if !staticSite>
+        <div id="soloComments" style="display: none;">
+            <@comments commentList=articleComments article=article></@comments>
+        </div>
+        </#if>
+    </#if>
     <div class="article__bottom">
         <div class="wrapper">
             <div class="fn__flex">
@@ -97,7 +114,7 @@
     <#if pjax><!---- pjax {#pjax} end ----></#if>
 </div>
 <script type="text/javascript"
-        src="${staticServePath}/skins/${skinDirName}/js/TweenMax${miniPostfix}.js?${staticResourceVersion}"
+        src="${staticServePath}/skins/${skinDirName}/js/TweenMax.min.js?${staticResourceVersion}"
         charset="utf-8"></script>
 <#include "footer.ftl">
 <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>

@@ -60,11 +60,13 @@
                             </span>
                         </div>
                         <div class="right article-element">
-                            <a rel="nofollow" href="${servePath}${article.articlePermalink}#comments">
-                                ${article.articleCommentCount}&nbsp;&nbsp;${commentLabel}
+                            <#if commentable>
+                            <a rel="nofollow" href="${servePath}${article.articlePermalink}#b3logsolocomments">
+                                <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>&nbsp;&nbsp;${commentLabel}
                             </a>&nbsp;&nbsp;
+                            </#if>
                             <a rel="nofollow" href="${servePath}${article.articlePermalink}">
-                                ${article.articleViewCount}&nbsp;&nbsp;${viewLabel}
+                                <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span>&nbsp;&nbsp;${viewLabel}
                             </a>
                         </div>
                         <div class="clear"></div>
@@ -104,7 +106,16 @@
                             <div id="externalRelevantArticles"></div>
                         </div>
                     </div>
-                    <@comments commentList=articleComments article=article></@comments>
+                    <#if commentable>
+                        <div id="b3logsolocomments"></div>
+                        <div id="vcomment" style="margin:15px 5px 0 5px;padding: 10px;background-color: #F5F5F5;box-sizing: border-box"
+                             data-name="${article.authorName}" data-postId="${article.oId}"></div>
+                        <#if !staticSite>
+                            <div id="soloComments" style="display: none;">
+                                <@comments commentList=articleComments article=article></@comments>
+                            </div>
+                        </#if>
+                    </#if>
                 </div>
                 <#include "side.ftl">
                 <div class="clear"></div>

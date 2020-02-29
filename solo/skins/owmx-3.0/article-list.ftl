@@ -43,14 +43,16 @@
         ${updateDateLabel}:
         <#else>
         ${createDateLabel}:
-        </#if> ${article.articleUpdateDate?string("yyyy-MM-dd HH:mm")} | ${viewCount1Label} <a rel="nofollow" href="${servePath}${article.articlePermalink}">
-            <span class="left article-browserIcon" title="${viewLabel}"></span>
-            ${article.articleViewCount}
-        </a> | ${commentCount1Label}
-        <a rel="nofollow" href="${servePath}${article.articlePermalink}#comments">
+        </#if> ${article.articleUpdateDate?string("yyyy-MM-dd HH:mm")} |
+        ${viewCount1Label}
+        <a rel="nofollow" href="${servePath}${article.articlePermalink}">
+            <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span>
+        </a><#if commentable> | ${commentCount1Label}
+        <a rel="nofollow" href="${servePath}${article.articlePermalink}#b3logsolocomments">
             <span class="left articles-commentIcon" title="${commentLabel}"></span>
-	        ${article.articleCommentCount}
+            <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>
         </a>
+        </#if>
     </p>
     <p>
         ${tags1Label}
@@ -68,18 +70,18 @@
 <div>
     <#if 1 != paginationPageNums?first>
     <a href="${servePath}${path}">${firstPageLabel}</a>
-    <a id="previousPage" href="${servePath}${path}?p=${paginationPreviousPageNum}">${previousPageLabel}</a>
+    <a id="previousPage" href="${servePath}${path}${pagingSep}${paginationPreviousPageNum}">${previousPageLabel}</a>
     </#if>
     <#list paginationPageNums as paginationPageNum>
     <#if paginationPageNum == paginationCurrentPageNum>
-    <a href="${servePath}${path}?p=${paginationPageNum}" class="selected">${paginationPageNum}</a>
+    <a href="${servePath}${path}${pagingSep}${paginationPageNum}" class="selected">${paginationPageNum}</a>
     <#else>
-    <a href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a>
+    <a href="${servePath}${path}${pagingSep}${paginationPageNum}">${paginationPageNum}</a>
     </#if>
     </#list>
     <#if paginationPageNums?last != paginationPageCount>
-    <a id="nextPage" href="${servePath}${path}?p=${paginationNextPageNum}">${nextPagePabel}</a>
-    <a href="${servePath}${path}?p=${paginationPageCount}">${lastPageLabel}</a>
+    <a id="nextPage" href="${servePath}${path}${pagingSep}${paginationNextPageNum}">${nextPagePabel}</a>
+    <a href="${servePath}${path}${pagingSep}${paginationPageCount}">${lastPageLabel}</a>
     </#if>
     &nbsp;&nbsp;${sumLabel} ${paginationPageCount} ${pageLabel}
 </div>

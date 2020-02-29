@@ -50,13 +50,12 @@
             </svg>
 
             <div class="side__header">
-                <a href="${servePath}" rel="start"><img class="side__logo" src="${adminUser.userAvatar}"></a>
+                <a href="${servePath}" rel="start"><img class="side__logo" alt="${blogTitle}" src="${adminUser.userAvatar}"></a>
 
                 <div class="side__meta">
                     ${statistic.statisticPublishedBlogArticleCount} ${articleLabel} <br>
-                    ${statistic.statisticPublishedBlogCommentCount} ${commentLabel} <br>
-                    ${statistic.statisticBlogViewCount} ${viewLabel} <br>
-                    ${onlineVisitorCnt} ${onlineVisitorLabel}
+                    <span data-uvstaturl="${servePath}">${statistic.statisticBlogViewCount}</span> ${viewLabel}
+                    <#if !staticSite><br>${onlineVisitorCnt} ${onlineVisitorLabel}</#if>
                 </div>
             </div>
 
@@ -76,11 +75,11 @@
                 <#list pageNavigations as page>
                     <li>
                         <a href="${page.pagePermalink}" target="${page.pageOpenTarget}"><#if page.pageIcon != ''><img
-                                class="page-icon" src="${page.pageIcon}"></#if>${page.pageTitle}</a>
+                                class="page-icon" src="${page.pageIcon}" alt="${page.pageTitle}"></#if>${page.pageTitle}</a>
                     </li>
                 </#list>
                 <li>
-                    <a href="${servePath}/category.html">${categoryLabel}</a>
+                    <a href="${servePath}/categories.html">${categoryLabel}</a>
                 </li>
                 <li>
                     <a href="${servePath}/tags.html">${allTagsLabel}</a>
@@ -94,26 +93,30 @@
                 <li>
                     <a rel="alternate" href="${servePath}/rss.xml">RSS</a>
                 </li>
-                <li>
-                    <a href="${servePath}/search?keyword=">Search</a>
-                </li>
-                <#if isLoggedIn>
+                <#if !staticSite>
                     <li>
-                        <a href="${servePath}/admin-index.do#main">
-                            ${adminLabel}
-                        </a>
+                        <a href="${servePath}/search?keyword=">Search</a>
                     </li>
-                    <li>
-                        <a href="${logoutURL}">
-                            ${logoutLabel}
-                        </a>
-                    </li>
-                <#else>
-                    <li>
-                        <a rel="alternate" href="${servePath}/start">
-                            ${startToUseLabel}
-                        </a>
-                    </li>
+                </#if>
+                <#if !staticSite>
+                    <#if isLoggedIn>
+                        <li>
+                            <a href="${servePath}/admin-index.do#main">
+                                ${adminLabel}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="${logoutURL}">
+                                ${logoutLabel}
+                            </a>
+                        </li>
+                    <#else>
+                        <li>
+                            <a rel="alternate" href="${servePath}/start">
+                                ${startToUseLabel}
+                            </a>
+                        </li>
+                    </#if>
                 </#if>
             </ul>
         </div>

@@ -19,14 +19,15 @@
  * @fileoverview util and every page should be used.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.4.0.0, Jul 26, 2017
+ * @version 1.0.0.0, Jan 18, 2019
  */
 
+import '../../../js/common'
 /**
  * @description next 皮肤脚本
  * @static
  */
-var NexT = {
+window.NexT = {
   init: function () {
     $('.sidebar-toggle').click(function () {
       var $sidebar = $('.sidebar');
@@ -99,7 +100,7 @@ var NexT = {
     }
   },
   initToc: function () {
-    var $articleTocs = $('.vditor-reset [id^=b3_solo_h]'),
+    var $articleTocs = $('.vditor-reset [id^=toc_h]'),
       $articleToc = $('.article__toc');
 
     $(window).scroll(function (event) {

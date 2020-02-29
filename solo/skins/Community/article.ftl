@@ -59,14 +59,16 @@
                         </li>
                         <li>
                             <a rel="nofollow" href="${servePath}${article.articlePermalink}" title="${viewLabel}">
-                                ${viewLabel} (${article.articleViewCount})
+                                ${viewLabel} (<span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span>)
                             </a>
                         </li>
+                        <#if commentable>
                         <li>
-                            <a rel="nofollow" title="${commentLabel}" href="${servePath}${article.articlePermalink}#comments">
-                                ${commentLabel} (${article.articleCommentCount})
+                            <a rel="nofollow" title="${commentLabel}" href="${servePath}${article.articlePermalink}#b3logsolocomments">
+                                ${commentLabel} (<span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span>)
                             </a>
                         </li>
+                        </#if>
                     </ul>
                     <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>
                         <br> <br>
@@ -119,7 +121,15 @@
                     <div id="externalRelevantArticles" class="article-relative"></div>
                 </div>
             </div>
-            <@comments commentList=articleComments article=article></@comments>
+            <#if commentable>
+                <div id="b3logsolocomments"></div>
+                <div id="vcomment" style="margin-bottom: 40px;border-top: 1px solid #dcdcdc;padding-top: 30px;" data-name="${article.authorName}" data-postId="${article.oId}"></div>
+                <#if !staticSite>
+                    <div id="soloComments" style="display: none;">
+                        <@comments commentList=articleComments article=article></@comments>
+                    </div>
+                </#if>
+            </#if>
         </div>
         <div>
             <#include "side.ftl">
