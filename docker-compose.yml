@@ -35,7 +35,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./solo/conf/latke.properties:/opt/solo/latke.properties:ro
-      - ./solo/skins/:/opt/solo/skins/:ro
     environment:
       - RUNTIME_DB=MYSQL
       - JDBC_USERNAME=root
