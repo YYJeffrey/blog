@@ -41,6 +41,7 @@ services:
       - JDBC_PASSWORD=setapassword
       - JDBC_DRIVER=com.mysql.cj.jdbc.Driver
       - JDBC_URL=jdbc:mysql://blog-mysql/solo?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    command: --static_server_scheme=https --static_server_host=www.example.com --static_server_port= --static_path=/opt/solo
   blog-nginx:
     image: nginx:1.14
     restart: always
